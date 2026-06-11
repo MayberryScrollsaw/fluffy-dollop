@@ -89,36 +89,36 @@
                 <a href="signBuilder/index.html" class="btn btn-primary">Open the Pattern Builder →</a>
             </div>
         </div>
-        <div class="hero-right">
-            <div class="tool-card scroll-reveal">
-                <div class="hero-right-text">
-                    <span class="free-badge">100% Free</span>
-                    <p class="eyebrow">Sign Pattern Builder</p>
-                    <h2>Design it.<br />Print it. Cut it.</h2>
-                    <p>
-                        Type your text, pick a font, preview the cut lines —
-                        then download a print-ready pattern. No account required.
-                    </p>
-                    <a href="signBuilder/index.html" class="btn btn-primary">Open the Pattern Builder →</a>
-                </div>
-            </div>
-        </div>
+        <!--<div class="hero-right">
+          <div class="tool-card scroll-reveal">
+              <div class="hero-right-text">
+                  <span class="free-badge">100% Free</span>
+                  <p class="eyebrow">Sign Pattern Builder</p>
+                  <h2>Design it.<br />Print it. Cut it.</h2>
+                  <p>
+                      Type your text, pick a font, preview the cut lines —
+                      then download a print-ready pattern. No account required.
+                  </p>
+                  <a href="signBuilder/index.html" class="btn btn-primary">Open the Pattern Builder →</a>
+              </div>
+          </div>
+      </div>
 
-        <div class="hero-right">
-            <div class="tool-card scroll-reveal">
-                <div class="hero-right-text">
-                    <span class="free-badge">100% Free</span>
-                    <p class="eyebrow">Sign Pattern Builder</p>
-                    <h2>Design it.<br />Print it. Cut it.</h2>
-                    <p>
-                        Type your text, pick a font, preview the cut lines —
-                        then download a print-ready pattern. No account required.
-                    </p>
-                    <a href="signBuilder/index.html" class="btn btn-primary">Open the Pattern Builder →</a>
-                </div>
-            </div>
-            <
-        </div>
+      <div class="hero-right">
+          <div class="tool-card scroll-reveal">
+              <div class="hero-right-text">
+                  <span class="free-badge">100% Free</span>
+                  <p class="eyebrow">Sign Pattern Builder</p>
+                  <h2>Design it.<br />Print it. Cut it.</h2>
+                  <p>
+                      Type your text, pick a font, preview the cut lines —
+                      then download a print-ready pattern. No account required.
+                  </p>
+                  <a href="signBuilder/index.html" class="btn btn-primary">Open the Pattern Builder →</a>
+              </div>
+          </div>
+
+      </div>-->
 
     </section>
 
@@ -415,11 +415,22 @@
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
         // ── NEWSLETTER FORM ───────────────────────────────────────
-        document.getElementById('newsletter-form').addEventListener('submit', e => {
+        document.getElementById('newsletter-form').addEventListener('submit', async e => {
             e.preventDefault();
             const name = document.getElementById('nl-name').value.trim();
             const email = document.getElementById('nl-email').value.trim();
             if (!name || !email) return;
+
+            await fetch('https://api.convertkit.com/v3/forms/9551576/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    api_key: 'PpSyDQjuJeA44E1BevoJJw',
+                    first_name: name,
+                    email: email
+                })
+            });
+
             e.target.hidden = true;
             document.getElementById('nl-success').removeAttribute('hidden');
         });
